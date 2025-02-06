@@ -1,5 +1,5 @@
 "use client"
-import React, { ReactNode, useRef } from "react";
+import  { ReactNode, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
