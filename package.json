@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.10",
+    "@napi-rs/canvas": "^0.1.66",
     "@react-three/fiber": "^8.17.14",
     "@react-three/postprocessing": "^2.19.1",
     "ascii-art": "^2.8.5",
