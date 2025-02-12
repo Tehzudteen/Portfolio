@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const NextPagePopup: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const navigate = useNavigate(); // Initialize React Router navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
-        setOpen(true);
-      }
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+          setOpen(true);
+        }
+      }, 200);
     };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
@@ -30,8 +39,7 @@ const NextPagePopup: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             style={{
-              background: `
-                linear-gradient(
+              background: `linear-gradient(
                   90deg,
                   rgba(255, 0, 0, 1) 0%,
                   rgba(255, 154, 0, 1) 10%,
@@ -49,9 +57,10 @@ const NextPagePopup: React.FC = () => {
               WebkitBackgroundClip: "text",
               color: "transparent",
               backgroundSize: "50% 100%",
+              backgroundPosition: "600% 50%",
             }}
             animate={{
-              backgroundPosition: ["600% 50%", "100% 50%"],
+              backgroundPosition: ["100% 50%", "600% 50%"],
             }}
             transition={{
               duration: 5,
@@ -59,8 +68,9 @@ const NextPagePopup: React.FC = () => {
               repeatType: "loop",
               ease: "linear",
             }}
-            className="text-2xl"
-            onClick={() => navigate("/about")} // Use navigate instead of window.location.href
+            className="text-2xl font-semibold"
+            aria-label="Showcase"
+            onClick={() => navigate("/about")}
           >
             Show case
           </motion.button>
