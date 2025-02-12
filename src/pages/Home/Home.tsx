@@ -1,5 +1,5 @@
-"use client"
-import  { ReactNode, useRef } from "react";
+"use client";
+import { ReactNode, useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -27,7 +27,7 @@ const Home = () => {
       >
         <Content3 />
       </TextParallaxContent>
-    </div>  
+    </div>
   );
 };
 
@@ -128,34 +128,81 @@ const OverlayCopy = ({
   );
 };
 
-const Content1 = () => (
-  <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
-    <h2 className="col-span-1 text-3xl font-bold md:col-span-4">
-      Additional content explaining the above card here
-    </h2>
-    <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-        blanditiis soluta eius quam modi aliquam quaerat odit deleniti minima
-        maiores voluptate est ut saepe accusantium maxime doloremque nulla
-        consectetur possimus.
-      </p>
-      <p className="mb-8 text-xl text-neutral-600 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        reiciendis blanditiis aliquam aut fugit sint.
-      </p>
-      <button className="w-full rounded bg-neutral-900 px-9 py-4 text-xl text-white transition-colors hover:bg-neutral-700 md:w-fit">
-        Learn more <FiArrowUpRight className="inline" />
-      </button>
+const Content1 = () => {
+  const [isFingersCrossed, setIsFingersCrossed] = useState(false);
+
+  // Automatically toggle the emoji every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFingersCrossed((prev) => !prev); // Toggle the state
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, []);
+
+  return (
+    <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
+      <motion.h1
+        className="col-span-1 text-3xl font-bold md:col-span-4"
+        style={{
+          background: `
+            linear-gradient(
+              90deg,
+              rgba(255, 0, 0, 1) 0%,
+              rgba(255, 154, 0, 1) 10%,
+              rgba(208, 222, 33, 1) 20%,
+              rgba(79, 220, 74, 1) 30%,
+              rgba(63, 218, 216, 1) 40%,
+              rgba(47, 201, 226, 1) 50%,
+              rgba(28, 127, 238, 1) 60%,
+              rgba(95, 21, 242, 1) 70%,
+              rgba(186, 12, 248, 1) 80%,
+              rgba(251, 7, 217, 1) 90%,
+              rgba(255, 0, 0, 1) 100%
+          )`,
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          backgroundSize: "50% 100%",
+        }}
+        animate={{
+          backgroundPosition: ["700% 50%", "100% 50%"], // Animate the gradient position
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "mirror",
+        }}
+      >
+        HI I'm Phubet Klubchai but you can call me Teh
+      </motion.h1>
+      <div className="col-span-1 md:col-span-8">
+        <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
+          I'm studying at Mae Fah Luang University, major in software
+          engineering. and this year am a student in year 3.
+        </p>
+        <p className="mb-8 text-xl text-neutral-600 md:text-2xl">
+          I have experience in programming
+          <motion.span className="text-4xl" transition={{ duration: 0.5 }}>
+            {isFingersCrossed ? "😘" : "😂"}
+          </motion.span>{" "}
+          (maybe) but you can tried to me skill 
+          because I'm always improve myself to be a good programmer.
+          <motion.span className="text-4xl" transition={{ duration: 0.5 }}>
+            {isFingersCrossed ? "🤞" : "✌️"}
+          </motion.span>
+        </p>
+        <p className="mb-8 text-xl text-neutral-600 md:text-2xl text-purple-500">
+          (joke na) I'm a good programmer and good person
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Content2 = () => (
   <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
-    <h2 className="col-span-1 text-3xl font-bold md:col-span-4">
-      nahee
-    </h2>
+    <h2 className="col-span-1 text-3xl font-bold md:col-span-4">nahee</h2>
     <div className="col-span-1 md:col-span-8">
       <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
@@ -176,9 +223,7 @@ const Content2 = () => (
 
 const Content3 = () => (
   <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
-    <h2 className="col-span-1 text-3xl font-bold md:col-span-4">
-      fuckyou
-    </h2>
+    <h2 className="col-span-1 text-3xl font-bold md:col-span-4">fuckyou</h2>
     <div className="col-span-1 md:col-span-8">
       <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,

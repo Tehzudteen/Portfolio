@@ -1,19 +1,35 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 
-//app rounter navbar to all pages
-const App = () => {
+const App: React.FC = () => {
+  const [showNavbar, setShowNavbar] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setShowNavbar(e.clientY < 50);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <Router>
-      <div className=" flex flex-col col-span-4 min-h-screen  justify-between ">
-        <div className="sticky top-0 z-50">
+      <div className="flex flex-col min-h-screen justify-between">
+        {/* Navbar visibility toggle */}
+        <div
+          className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+            showNavbar ? "translate-y-0" : "-translate-y-full"
+          }`}
+        >
           <Navbar />
         </div>
 
-        <div className="container min-h-screen flex justify-center  min-w-full">
+        <div className="container min-h-screen flex justify-center min-w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
