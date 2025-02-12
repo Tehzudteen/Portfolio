@@ -179,7 +179,7 @@ const Content1 = () => {
       <div className="col-span-1 md:col-span-8">
         <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
           I'm studying at Mae Fah Luang University, major in software
-          engineering. and this year am a student in year 3.
+          engineering. this year am a student in year 3.
         </p>
         <p className="mb-8 text-xl text-neutral-600 md:text-2xl">
           I have experience in programming
