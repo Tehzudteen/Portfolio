@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const NextPagePopup: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  
+  const navigate = useNavigate(); // Initialize React Router navigation
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
@@ -13,19 +15,19 @@ const NextPagePopup: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   return (
     <div className="flex flex-col items-center justify-center">
       {open && (
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          exit={{ opacity: 0, y: 50 }} 
-          transition={{ duration: 0.5 }} 
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.5 }}
           className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg w-30"
         >
-          <motion.button 
-            whileHover={{ scale: 1.1 }} 
+          <motion.button
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             style={{
               background: `
@@ -57,10 +59,10 @@ const NextPagePopup: React.FC = () => {
               repeatType: "loop",
               ease: "linear",
             }}
-            className="   text-2xl " 
-            onClick={() => window.location.href = '/about'}
+            className="text-2xl"
+            onClick={() => navigate("/about")} // Use navigate instead of window.location.href
           >
-            Show case 
+            Show case
           </motion.button>
         </motion.div>
       )}
