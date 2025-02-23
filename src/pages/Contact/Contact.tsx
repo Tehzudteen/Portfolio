@@ -1,118 +1,107 @@
-import { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+import { FiPhoneCall } from "react-icons/fi";
+import { HiOutlineChatAlt2 } from "react-icons/hi";
+import { BsBriefcase } from "react-icons/bs";
 
-const Contact: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleFakeSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setTimeout(() => {
-      setIsSubmitted(true);
-    }, 1000);
-  };
-
+const ContactPage: React.FC = () => {
   return (
-    <div className="container mx-auto my-10 p-8 min-h-screen flex flex-col items-center bg-white text-gray-900">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="text-5xl font-extrabold text-center mb-8 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text"
-      >
-        Contact Me
-      </motion.h1>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Contact Us
+        </h1>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-8 border border-gray-200 relative group"
-      >
-        {/* Hover effect background animation */}
+        {/* Three-column contact options */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <ContactCard
+            Icon={FiPhoneCall}
+            title="By Phone"
+            description="Reach us via our toll-free numbers."
+            lines={[
+              "North America: 1-877-300-7483",
+              "International: 1-604-637-0780",
+            ]}
+            buttonText="Call Now"
+          />
+          <ContactCard
+            Icon={BsBriefcase}
+            title="Start a New Case"
+            description="Send us your questions or concerns to get quick support."
+            buttonText="Start Here"
+          />
+          <ContactCard
+            Icon={HiOutlineChatAlt2}
+            title="Live Chat"
+            description="Chat with a member of our in-house team."
+            buttonText="Start Chat"
+          />
+        </div>
+
+        {/* Track a Case Section */}
         <motion.div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-r from-blue-200 to-purple-200"
-        ></motion.div>
-
-        {isSubmitted ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <h2 className="text-2xl font-semibold text-green-600">✅ Message Sent!</h2>
-            <p className="text-gray-600 mt-2">This is just a visual effect. No data was sent.</p>
-          </motion.div>
-        ) : (
-          <form onSubmit={handleFakeSubmit} className="space-y-6 relative z-10">
-            <div>
-              <label className="block text-lg font-medium text-gray-700">Name</label>
-              <motion.input
-                whileFocus={{ scale: 1.02, borderColor: "#3b82f6", backgroundColor: "#f8f9fa" }}
-                type="text"
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block text-lg font-medium text-gray-700">Email</label>
-              <motion.input
-                whileFocus={{ scale: 1.02, borderColor: "#3b82f6", backgroundColor: "#f8f9fa" }}
-                type="email"
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block text-lg font-medium text-gray-700">Message</label>
-              <motion.textarea
-                whileFocus={{ scale: 1.02, borderColor: "#3b82f6", backgroundColor: "#f8f9fa" }}
-                required
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
-              ></motion.textarea>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              type="submit"
-              className="w-full px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-all"
-            >
-              Send Message
-            </motion.button>
-          </form>
-        )}
-      </motion.div>
-
-      {/* Social Media Links with Hover Effects */}
-      <div className="mt-8 flex space-x-6">
-        <motion.a
-          whileHover={{ scale: 1.1, color: "#3b82f6" }}
-          href="mailto:your-email@example.com"
-          className="text-gray-700 transition"
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
         >
-          📧 Email
-        </motion.a>
-        <motion.a
-          whileHover={{ scale: 1.1, color: "#3b82f6" }}
-          href="https://linkedin.com/in/yourprofile"
-          className="text-gray-700 transition"
-        >
-          🔗 LinkedIn
-        </motion.a>
-        <motion.a
-          whileHover={{ scale: 1.1, color: "#3b82f6" }}
-          href="https://github.com/yourprofile"
-          className="text-gray-700 transition"
-        >
-          💻 GitHub
-        </motion.a>
+          <h3 className="text-2xl font-semibold mb-4">Track a Case</h3>
+          <p className="text-gray-600 mb-6">
+            View the status of your messages with our support team.
+          </p>
+          <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+            Track Now
+          </button>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default Contact;
+interface ContactCardProps {
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  description: string;
+  lines?: string[];
+  buttonText: string;
+}
+
+const ContactCard: React.FC<ContactCardProps> = ({
+  Icon,
+  title,
+  description,
+  lines,
+  buttonText,
+}) => {
+  return (
+    <motion.div
+      // Outer div creates the gradient border
+      className="relative p-[2px] bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 animate-gradient rounded-lg shadow"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.03 }}
+    >
+      {/* Inner content (white card) */}
+      <div className="bg-white rounded-md p-8 flex flex-col items-center">
+        <Icon className="text-5xl text-gray-600 mb-4" />
+        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+        <p className="text-gray-500 mb-4">{description}</p>
+        {lines &&
+          lines.map((line, idx) => (
+            <div key={idx} className="text-gray-700 mb-1">
+              {line}
+            </div>
+          ))}
+        {lines && <div className="mb-4"></div>}
+        <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200 transition">
+          {buttonText}
+        </button>
+      </div>
+    </motion.div>
+  );
+};
+
+export default ContactPage;
