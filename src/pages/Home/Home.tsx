@@ -175,7 +175,7 @@ const Content1 = () => {
           ease: "linear",
         }}
       >
-        HI I'm Phubet Klubchai but you can call me Teh
+        HI I'm Phubet Klubchai but you can call me "Teh"
       </motion.h1>
       <div className="col-span-1 md:col-span-8">
         <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
