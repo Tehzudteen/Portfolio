@@ -1,15 +1,10 @@
 import React, { FC, useRef } from "react";
-import {
-  motion,
-  HTMLMotionProps,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, HTMLMotionProps, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { FiArrowRight } from "react-icons/fi";
 import { SiGithub } from "react-icons/si";
 import { RxLinkedinLogo } from "react-icons/rx";
+import { Link } from "react-router-dom"; // import สำหรับการนำทางภายใน
 
 const About: FC = () => {
   return (
@@ -33,7 +28,7 @@ const About: FC = () => {
   );
 };
 
-// Extend HTMLMotionProps to allow motion props (such as whileHover)
+// Extend HTMLMotionProps เพื่อรองรับ motion props (เช่น whileHover)
 interface BlockProps extends HTMLMotionProps<"div"> {
   className?: string;
 }
@@ -51,10 +46,7 @@ const Block: FC<BlockProps> = ({ className, ...rest }) => {
         stiffness: 400,
         damping: 50,
       }}
-      className={twMerge(
-        "col-span-4 rounded-lg border border-zinc-700 bg-zinc-800 p-6",
-        className
-      )}
+      className={twMerge("col-span-4 rounded-lg border border-zinc-700 bg-zinc-800 p-6", className)}
       {...rest}
     />
   );
@@ -65,17 +57,15 @@ const HeaderBlock = () => (
     <img
       src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=tom"
       alt="avatar"
-      className="mb-4 size-14 rounded-full"
+      className="mb-4 w-14 h-14 rounded-full"  // เปลี่ยนจาก size-14 เป็น w-14 h-14
     />
     <h1 className="mb-12 text-4xl font-medium leading-tight">
       I build cool websites like this one.
     </h1>
-    <a
-      href="/contact"
-      className="flex items-center gap-1 text-red-300 hover:underline"
-    >
+    {/* ใช้ Link สำหรับ client-side routing */}
+    <Link to="/contact" className="flex items-center gap-1 text-red-300 hover:underline">
       Contact me <FiArrowRight />
-    </a>
+    </Link>
   </Block>
 );
 
@@ -87,6 +77,8 @@ const SocialsBlock = () => (
     >
       <a
         href="https://www.linkedin.com/in/phubet-klubchai-03555730b/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="grid h-full place-content-center text-3xl text-white"
       >
         <RxLinkedinLogo />
@@ -98,12 +90,13 @@ const SocialsBlock = () => (
     >
       <a
         href="https://github.com/Tehzudteen"
+        target="_blank"
+        rel="noopener noreferrer"
         className="grid h-full place-content-center text-3xl text-white"
       >
         <SiGithub />
       </a>
     </Block>
-
   </>
 );
 
@@ -169,6 +162,7 @@ export const HoverImageLinks = () => {
       transition={{ duration: 0.8, ease: "easeOut", staggerChildren: 0.1 }}
       className="bg-neutral-950 p-4 md:p-8"
     >
+      {/* แก้ไข grid-cols- ให้ถูกต้อง */}
       <div className="mx-auto max-w-5xl grid grid-cols-1 gap-4">
         <LinkItem
           heading="About"
@@ -236,9 +230,7 @@ const LinkItem = ({ heading, imgSrc, subheading, href }: LinkItemProps) => {
   const top = useTransform(mouseYSpring, [0.5, -0.5], ["40%", "60%"]);
   const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     const rect = ref.current!.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -275,13 +267,13 @@ const LinkItem = ({ heading, imgSrc, subheading, href }: LinkItemProps) => {
         >
           {heading.split("").map((l, i) => (
             <motion.span
+              key={i}
               variants={{
                 initial: { x: 0 },
                 whileHover: { x: 16 },
               }}
               transition={{ type: "spring" }}
               className="inline-block"
-              key={i}
             >
               {l}
             </motion.span>
