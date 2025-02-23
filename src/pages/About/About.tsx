@@ -191,19 +191,19 @@ export const HoverImageLinks = () => {
         <LinkItem
           heading="Careers"
           subheading="We want cool people"
-          imgSrc="/imgs/random/5.jpg"
+          imgSrc="https://i.pinimg.com/originals/5c/b7/e2/5cb7e22b0cef069aff4b0ae8abd5fb3a.gif"
           href="#"
         />
         <LinkItem
           heading="Projects"
           subheading="See my projects in detail"
-          imgSrc="/imgs/random/3.jpg"
+          imgSrc="https://i.pinimg.com/originals/5c/b7/e2/5cb7e22b0cef069aff4b0ae8abd5fb3a.gif"
           href="#projects"
         />
         <LinkItem
           heading="Experience"
           subheading="My professional journey"
-          imgSrc="/imgs/random/7.jpg"
+          imgSrc="https://i.pinimg.com/originals/5c/b7/e2/5cb7e22b0cef069aff4b0ae8abd5fb3a.gif"
           href="#experience"
         />
       </div>
